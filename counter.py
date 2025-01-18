@@ -4,7 +4,14 @@ from nltk.tokenize import word_tokenize
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import nltk
-nltk.download('punkt_tab')
+
+# 下载punkt资源，用于英文分词
+nltk.download('punkt')
+
+# 读取停用词文件，每行一个停用词，存储为列表
+with open('stopwords.txt', 'r') as f:
+    stopwords = [line.strip() for line in f.readlines()]
+
 # 存储错误信息和出现次数的字典
 error_dict = {}
 
@@ -20,11 +27,13 @@ with open('releases_info.txt', 'r') as file:
                 # 英文分词
                 words = word_tokenize(error_description.lower())
                 for word in words:
-                    # 更新错误信息字典
-                    if word in error_dict:
-                        error_dict[word] += 1
-                    else:
-                        error_dict[word] = 1
+                    # 过滤停用词
+                    if word not in stopwords:
+                        # 更新错误信息字典
+                        if word in error_dict:
+                            error_dict[word] += 1
+                        else:
+                            error_dict[word] = 1
 
 # 将错误信息和出现次数转换为 DataFrame
 df = pd.DataFrame(list(error_dict.items()), columns=['Error', 'Frequency'])
