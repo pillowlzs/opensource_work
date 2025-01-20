@@ -1,0 +1,27 @@
+Total Python files analyzed: 15209
+Total functions found: 42151
+Total classes found: 13622
+
+Some function details (name and docstring):
+Function: setup, Docstring: No docstring
+Function: readme, Docstring: No docstring
+Function: get_credentials, Docstring: No docstring
+Function: get_config, Docstring: No docstring
+Function: __init__, Docstring: No docstring
+Function: __str__, Docstring: No docstring
+Function: __init__, Docstring: No docstring
+Function: sign_in, Docstring: No docstring
+Function: update_session_plot_options, Docstring: No docstring
+Function: get_session_plot_options, Docstring: No docstring
+
+Some class details:
+Class: InputError
+Class: PlotlyRequestError
+Class: PlotlyLocalError
+Class: PlotlyLocalCredentialsError
+Class: PlotlyServerError
+Class: PlotlyConnectionError
+Class: PlotlyCredentialError
+Class: PlotlyAccountError
+Class: PlotlyRateLimitError
+Class: Dashboard
