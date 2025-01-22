@@ -1,0 +1,134 @@
+##这个是模糊测试中遇到的一个问题。可以看得出来plotly对于输入的x，y长度相同要求得很严格。解决方案是随机生成测试数据之后，对于生成的数据进行处理强制使其长度相同
+
+close:
+solution:
+# 强制确保 x 和 y 的长度一致
+    if len(x) != len(y):
+        min_len = min(len(x), len(y))
+        x = x[:min_len]  # 截取 x 的前 min_len 个元素
+        y = y[:min_len]  # 截取 y 的前 min_len 个元素
+
+
+
+
+
+
+(venv) PS E:\04college\opensource> pytest fuzz_chart.py
+================================================= test session starts =================================================
+platform win32 -- Python 3.12.6, pytest-8.3.4, pluggy-1.5.0
+rootdir: E:\04college\opensource
+plugins: hypothesis-6.124.2
+collected 1 item
+
+fuzz_chart.py F                                                                                                  [100%]
+
+====================================================== FAILURES =======================================================
+__________________________________________________ test_plotly_chart __________________________________________________
+  + Exception Group Traceback (most recent call last):
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\_pytest\runner.py", line 341, in from_call
+  |     result: TResult | None = func()
+  |                              ^^^^^^
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\_pytest\runner.py", line 242, in <lambda>
+  |     lambda: runtest_hook(item=item, **kwds), when=when, reraise=reraise
+  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\pluggy\_hooks.py", line 513, in __call__
+  |     return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+  |     return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\pluggy\_callers.py", line 182, in _multicall
+  |     return outcome.get_result()
+  |            ^^^^^^^^^^^^^^^^^^^^
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\pluggy\_result.py", line 100, in get_result
+  |     raise exc.with_traceback(exc.__traceback__)
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\pluggy\_callers.py", line 167, in _multicall
+  |     teardown.throw(outcome._exception)
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\_pytest\threadexception.py", line 92, in pytest_runtest_call
+  |     yield from thread_exception_runtest_hook()
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\_pytest\threadexception.py", line 68, in thread_exception_runtest_hook
+  |     yield
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\pluggy\_callers.py", line 167, in _multicall
+  |     teardown.throw(outcome._exception)
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\_pytest\unraisableexception.py", line 95, in pytest_runtest_call
+  |     yield from unraisable_exception_runtest_hook()
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\_pytest\unraisableexception.py", line 70, in unraisable_exception_runtest_hook
+  |     yield
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\pluggy\_callers.py", line 167, in _multicall
+  |     teardown.throw(outcome._exception)
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\_pytest\logging.py", line 846, in pytest_runtest_call
+  |     yield from self._runtest_for(item, "call")
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\_pytest\logging.py", line 829, in _runtest_for
+  |     yield
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\pluggy\_callers.py", line 167, in _multicall
+  |     teardown.throw(outcome._exception)
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\_pytest\capture.py", line 880, in pytest_runtest_call
+  |     return (yield)
+  |             ^^^^^
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\pluggy\_callers.py", line 167, in _multicall
+  |     teardown.throw(outcome._exception)
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\_pytest\skipping.py", line 257, in pytest_runtest_call
+  |     return (yield)
+  |             ^^^^^
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\pluggy\_callers.py", line 103, in _multicall
+  |     res = hook_impl.function(*args)
+  |           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\_pytest\runner.py", line 174, in pytest_runtest_call
+  |     item.runtest()
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\_pytest\python.py", line 1627, in runtest
+  |     self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\pluggy\_hooks.py", line 513, in __call__
+  |     return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\pluggy\_manager.py", line 120, in _hookexec
+  |     return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\pluggy\_callers.py", line 139, in _multicall
+  |     raise exception.with_traceback(exception.__traceback__)
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\pluggy\_callers.py", line 103, in _multicall
+  |     res = hook_impl.function(*args)
+  |           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\_pytest\python.py", line 159, in pytest_pyfunc_call
+  |     result = testfunction(**testargs)
+  |              ^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "E:\04college\opensource\fuzz_chart.py", line 28, in test_plotly_chart
+  |     def test_plotly_chart(chart_type, x, y, size):
+  |                    ^^^
+  |   File "E:\04college\opensource\plotly.py-6.0.0rc0\packages\python\venv\Lib\site-packages\hypothesis\core.py", line 1823, in wrapped_test
+  |     raise the_error_hypothesis_found
+  | ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "E:\04college\opensource\fuzz_chart.py", line 33, in test_plotly_chart
+    |     assert len(x) == len(y), f"x 和 y 的长度不一致: {len(x)} != {len(y)}"
+    | AssertionError: x 和 y 的长度不一致: 1 != 2
+    | assert 1 == 2
+    |  +  where 1 = len([0.0])
+    |  +  and   2 = len([0.0, 0.0])
+    | Falsifying example: test_plotly_chart(
+    |     # The test sometimes passed when commented parts were varied together.
+    |     chart_type='scatter',  # or any other generated value
+    |     x=[0.0],
+    |     y=[0.0, 0.0],
+    |     size=1,  # or any other generated value
+    | )
+    +---------------- 2 ----------------
+    | Traceback (most recent call last):
+    |   File "E:\04college\opensource\fuzz_chart.py", line 61, in test_plotly_chart
+    |     assert fig.data[0].type == chart_type
+    | AssertionError: assert 'scatter' == 'line'
+    |
+    |   - line
+    |   + scatter
+    | Falsifying example: test_plotly_chart(
+    |     chart_type='line',
+    |     x=[0.0],
+    |     y=[0.0],
+    |     size=1,  # or any other generated value
+    | )
+    | Explanation:
+    |     These lines were always and only run by failing examples:
+    |         E:\04college\opensource\fuzz_chart.py:40
+    +------------------------------------
+=============================================== short test summary info ===============================================
+FAILED fuzz_chart.py::test_plotly_chart - ExceptionGroup: Hypothesis found 2 distinct failures. (2 sub-exceptions)
